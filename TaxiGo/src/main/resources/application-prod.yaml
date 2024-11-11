@@ -1,5 +1,8 @@
 spring:
   profiles: prod
+  
+  liquibase:
+        change-log: classpath:db/changelog/db.changelog-master.yaml
 
   datasource:
     url: jdbc:postgresql://localhost:5432/proddb
