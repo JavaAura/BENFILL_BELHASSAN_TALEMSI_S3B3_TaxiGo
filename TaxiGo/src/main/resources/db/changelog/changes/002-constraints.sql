@@ -1,0 +1,2 @@
+ALTER TABLE reservations
+ADD CONSTRAINT check_status CHECK (status IN ('CREATED', 'CONFIRMED', 'COMPLETED', 'CANCELLED'));
