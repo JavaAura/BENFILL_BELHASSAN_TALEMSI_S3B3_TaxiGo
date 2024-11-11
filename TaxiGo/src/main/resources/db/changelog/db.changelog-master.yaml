@@ -1,0 +1,11 @@
+# src/main/resources/db/changelog/db.changelog-master.yaml
+databaseChangeLog:
+  - include:
+      file: changes/001-create-schema.sql
+      relativeToChangelogFile: true
+  - include: 
+      file: changes/002-constraints.sql
+      relativeToChangelogFile: true
+  - include:
+      file: changes/003-reference-data.sql
+      relativeToChangelogFile: true

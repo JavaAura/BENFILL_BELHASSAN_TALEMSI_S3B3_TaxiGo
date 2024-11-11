@@ -1,0 +1,8 @@
+spring:
+  profiles: prod
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/proddb
+    driver-class-name: org.postgresql.Driver
+    username: produser
+    password: prodpassword

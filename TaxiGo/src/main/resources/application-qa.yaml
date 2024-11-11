@@ -1,0 +1,8 @@
+spring:
+  profiles: qa
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/qadb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: qauser
+    password: qapassword
