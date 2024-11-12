@@ -1,5 +1,11 @@
 package io.benfill.TaxiGo.repository;
 
-public interface DriverRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import io.benfill.TaxiGo.model.Driver;
+
+@Repository
+public interface DriverRepository extends JpaRepository<Driver, Long> {
 
 }

@@ -46,5 +46,4 @@ public @Data class Vehicle {
 	private List<Reservation> reservations;
 	
 	
-	
 }
