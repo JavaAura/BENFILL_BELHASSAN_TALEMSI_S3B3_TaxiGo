@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ModelNotFoundExceptionHandler {
 	
-	
 	@ExceptionHandler(value = {ModelNotFoundException.class})
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ExceptionMessage handleModelNotFound(ModelNotFoundException ex) {
