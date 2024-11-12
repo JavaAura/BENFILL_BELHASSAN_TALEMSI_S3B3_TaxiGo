@@ -1,3 +1,6 @@
+ALTER TABLE reservations ADD COLUMN heureDebutCourse INTEGER;
+
+ALTER TABLE reservations ADD COLUMN heureFinCourse INTEGER;
 
 ALTER TABLE reservations ADD COLUMN driver_id INTEGER;
 
