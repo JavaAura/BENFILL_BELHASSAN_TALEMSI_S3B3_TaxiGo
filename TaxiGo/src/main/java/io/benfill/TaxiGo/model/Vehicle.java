@@ -24,20 +24,20 @@ public @Data class Vehicle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "model", nullable = false)
+	@Column(name = "model")
 	private String model;
 	
-	@Column(name = "license_plate", nullable = false)
+	@Column(name = "license_plate")
 	private String licensePlate;
 	
-	@Column(name = "mileage", nullable = false)
+	@Column(name = "mileage")
 	private String mileage;
 	
-	@Column(name = "status", nullable = false)
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
-	@Column(name = "type", nullable = false)
+	@Column(name = "type")
 	@Enumerated(EnumType.STRING)
 	private VehicleType type;
 	
