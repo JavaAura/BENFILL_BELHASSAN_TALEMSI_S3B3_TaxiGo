@@ -30,7 +30,7 @@ public @Data class DriverModel {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
-//	private Status status;
+    //	private Status status;
 	
 	@Column(name = "availability_start", nullable = false)
 	private LocalDateTime availabilityStart;
