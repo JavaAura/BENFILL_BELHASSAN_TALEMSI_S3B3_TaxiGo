@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.benfill.TaxiGo.model.enums.Status;
 //import io.benfill.TaxiGo.model.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "drivers")
 @AllArgsConstructor
 @NoArgsConstructor
-public @Data class DriverModel {
+public @Data class Driver {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +31,7 @@ public @Data class DriverModel {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
-//	private Status status;
+ private Status status;
 	
 	@Column(name = "availability_start", nullable = false)
 	private LocalDateTime availabilityStart;
