@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS drivers (
 
 CREATE TABLE IF NOT EXISTS vehicles (
     id SERIAL PRIMARY KEY,
-    model VARCHAR(100) NOT NULL,
-    license_plate VARCHAR(20) NOT NULL,
-    mileage INT NOT NULL,
-    status VARCHAR(20) NOT NULL,
-    type VARCHAR(20) NOT NULL
+    model VARCHAR(100) ,
+    license_plate VARCHAR(20) ,
+    mileage INT ,
+    status VARCHAR(20) ,
+    type VARCHAR(20)
 );
