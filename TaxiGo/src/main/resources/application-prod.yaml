@@ -5,7 +5,7 @@ spring:
         change-log: classpath:db/changelog/db.changelog-master.yaml
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/proddb
+    url: jdbc:postgresql://localhost:5432/taxiGo_db
     driver-class-name: org.postgresql.Driver
-    username: produser
-    password: prodpassword
+    username: postgres
+    password: Abdo@2023
