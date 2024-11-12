@@ -1,6 +1,5 @@
 package io.benfill.TaxiGo.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,37 +13,38 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import io.benfill.TaxiGo.model.enums.Status;
-//import io.benfill.TaxiGo.model.enums.Status;
-import lombok.AllArgsConstructor;
+import io.benfill.TaxiGo.model.enums.VehicleType;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "drivers")
-@AllArgsConstructor
-@NoArgsConstructor
-public @Data class Driver {
+@Table(name = "vehicles")
+public @Data class Vehicle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
 	private Long id;
 	
-	@Column(name = "first_name", nullable = false)
-	private String firstName;
-	@Column(name = "last_name", nullable = false)
-	private String lastName;
+	@Column(name = "model", nullable = false)
+	private String model;
+	
+	@Column(name = "license_plate", nullable = false)
+	private String licensePlate;
+	
+	@Column(name = "mileage", nullable = false)
+	private String mileage;
 	
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
-	@Column(name = "availability_start", nullable = false)
-	private LocalDateTime availabilityStart;
-	@Column(name = "availability_end", nullable = false)
-	private LocalDateTime availabilityEnd;
+	@Column(name = "type", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private VehicleType type;
 	
-	@OneToMany(mappedBy = "driver")
+	
+	@OneToMany(mappedBy = "vehicle")
 	private List<Reservation> reservations;
-
+	
+	
+	
 }
