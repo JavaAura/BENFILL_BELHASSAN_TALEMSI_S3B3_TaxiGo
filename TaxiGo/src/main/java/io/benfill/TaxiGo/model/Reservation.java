@@ -35,6 +35,12 @@ public class Reservation {
 	
 	@Column(name = "price", nullable = false)
 	private Integer price;
+
+	@Column(name = "heureDebutCourse" ,nullable = false)
+	private Integer heureDebutCourse;
+
+	@Column(name = "heureFinCourse" ,nullable = false)
+	private Integer heureFinCourse;
 	
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)

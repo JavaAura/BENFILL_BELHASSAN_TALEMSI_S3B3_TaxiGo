@@ -9,7 +9,7 @@ INSERT INTO vehicles (model, license_plate, mileage, status, type) VALUES
     ('Mercedes-Benz Sprinter', 'PQR456', 30000, 'UNAVAILABLE', 'MINIBUS');
     
     
-INSERT INTO reservations (date_time, departure_address, arrival_address, price, status, distance_km, driver_id, vehicle_id) VALUES
-    ('2023-05-01 10:00:00', 'New York Manhattan', 'New York Brownx', 50.00, 'CREATED', 385.2, 1, 1),
-    ('2023-05-02 14:30:00', 'Los Angeles Hollywood', 'Los Angeles center', 35.00, 'CONFIRMED', 268.4, 2, 2),
-    ('2023-05-03 18:15:00', 'Chicago', 'Chicago downcity', 45.00, 'COMPLETED', 385.2, 3, 3);
+INSERT INTO reservations (date_time, departure_address, arrival_address, price, status, distance_km, driver_id, vehicle_id,heureDebutCourse,heureFinCourse) VALUES
+    ('2023-05-01 10:00:00', 'New York Manhattan', 'New York Brownx', 50.00, 'CREATED', 385.2, 1, 1,8,9),
+    ('2023-05-02 14:30:00', 'Los Angeles Hollywood', 'Los Angeles center', 35.00, 'CONFIRMED', 268.4, 2, 2,10,11),
+    ('2023-05-03 18:15:00', 'Chicago', 'Chicago downcity', 45.00, 'COMPLETED', 385.2, 3, 3,12,13);
