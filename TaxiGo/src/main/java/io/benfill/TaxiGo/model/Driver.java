@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import io.benfill.TaxiGo.model.enums.Status;
 //import io.benfill.TaxiGo.model.enums.Status;
@@ -35,16 +37,15 @@ public @Data class Driver {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
-
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Status status;
-
-
+	
 	@Column(name = "availability_start", nullable = false)
 	private LocalDateTime availabilityStart;
 	@Column(name = "availability_end", nullable = false)
 	private LocalDateTime availabilityEnd;
+	
 	@OneToMany(mappedBy = "driver")
 	private List<Reservation> reservations;
 
