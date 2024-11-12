@@ -2,19 +2,19 @@ package io.benfill.TaxiGo.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import io.benfill.TaxiGo.model.enums.ReservationStatus;
 import io.benfill.TaxiGo.utils.AddressConverter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "reservations")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reservation {
 
 	@Id
