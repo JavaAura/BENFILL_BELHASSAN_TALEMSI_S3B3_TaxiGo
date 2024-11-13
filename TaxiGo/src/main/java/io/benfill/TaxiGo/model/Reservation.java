@@ -1,5 +1,6 @@
 package io.benfill.TaxiGo.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
@@ -33,27 +34,27 @@ public class Reservation {
 	@Column(name = "arrival_address", nullable = false)
 	private String arrivalAddress;
 	
-	@Column(name = "price", nullable = false)
-	private Integer price;
+	@Column(name = "price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
 
-	@Column(name = "heureDebutCourse" ,nullable = false)
-	private Integer heureDebutCourse;
+	@Column(name = "start_time_course" ,nullable = false)
+	private Integer startTimeCourse;
 
-	@Column(name = "heureFinCourse" ,nullable = false)
-	private Integer heureFinCourse;
+	@Column(name = "end_time_course" ,nullable = false)
+	private Integer endTimeCourse;
 	
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private ReservationStatus status;
 	
-	@Column(name = "distance_km", nullable = false)
-	private Double distanceKm;
+	@Column(name = "distance_km", nullable = false, precision = 10, scale = 2)
+    private BigDecimal distanceKm;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "driver_id", nullable = false)
 	private Driver driver;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vehicle_id", nullable = false)
 	private Vehicle vehicle;
 
