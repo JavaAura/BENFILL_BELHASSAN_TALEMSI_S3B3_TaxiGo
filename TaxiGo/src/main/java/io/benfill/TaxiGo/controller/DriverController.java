@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.benfill.TaxiGo.dto.driver.DriverDtoPost;
 import io.benfill.TaxiGo.exception.BusinessException;
+import io.benfill.TaxiGo.dto.driver.DriverDtoAnalytics;
 import io.benfill.TaxiGo.dto.driver.DriverDtoAvailability;
 import io.benfill.TaxiGo.dto.driver.DriverDtoGet;
 import io.benfill.TaxiGo.service.impl.DriverServiceImpl;
@@ -80,6 +81,11 @@ public class DriverController {
 	public ResponseEntity<?> getDriverAvailability(@PathVariable Long id) {
 		DriverDtoAvailability dto = driverService.CheckDriverAvailability(id);
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
+	}
+	
+	@GetMapping("analytics")
+	public ResponseEntity<?> getDriverAnalytics() {
+		return driverService.getAnalytics();
 	}
 
 }
