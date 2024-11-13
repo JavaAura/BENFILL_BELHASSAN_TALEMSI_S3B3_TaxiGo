@@ -7,5 +7,4 @@ import io.benfill.TaxiGo.model.Driver;
 
 @Repository
 public interface DriverRepository extends JpaRepository<Driver, Long> {
-
 }

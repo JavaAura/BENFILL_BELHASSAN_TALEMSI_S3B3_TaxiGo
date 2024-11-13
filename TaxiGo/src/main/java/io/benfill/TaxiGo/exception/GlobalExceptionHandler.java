@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
@@ -46,4 +47,18 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, status);
     }
+    
+    @ExceptionHandler(value = {ModelNotFoundException.class})
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<ExceptionMessage> handleModelNotFound(ModelNotFoundException ex) {
+	    ExceptionMessage exceptionMessage = new ExceptionMessage(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+	    return new ResponseEntity<>(exceptionMessage, HttpStatus.NOT_FOUND);
+	}
+    
+    @ExceptionHandler(value = {BusinessException.class})
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ResponseEntity<ExceptionMessage> handleModelNotFound(BusinessException ex) {
+	    ExceptionMessage exceptionMessage = new ExceptionMessage(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+	    return new ResponseEntity<>(exceptionMessage, HttpStatus.BAD_REQUEST);
+	}
 }

@@ -1,5 +1,6 @@
 package io.benfill.TaxiGo.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,6 +9,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import io.benfill.TaxiGo.dto.driver.DriverDtoPost;
+import io.benfill.TaxiGo.dao.IDriverDao;
+import io.benfill.TaxiGo.dto.driver.DriverDtoAnalytics;
+import io.benfill.TaxiGo.dto.driver.DriverDtoAvailability;
 import io.benfill.TaxiGo.dto.driver.DriverDtoGet;
 import io.benfill.TaxiGo.exception.BusinessException;
 import io.benfill.TaxiGo.exception.ModelNotFoundException;
@@ -25,6 +29,7 @@ import lombok.AllArgsConstructor;
 public class DriverServiceImpl implements IDriverService {
 
 	private final DriverRepository driverRepository;
+	private final IDriverDao driverDao;
 	private final ReservationRepository reservationRepository;
 	private final DriverMappper driverMappper;
 
@@ -39,7 +44,7 @@ public class DriverServiceImpl implements IDriverService {
 
 	public List<DriverDtoGet> getAllDrivers() {
 		List<Driver> drivers = driverRepository.findAll();
-		return drivers.stream().map(d -> driverMappper.convertEntityToDto(d)).toList();
+		return drivers.stream().map(d -> driverMappper.convertEntityToDto(d)).collect(Collectors.toList());
 	}
 
 	public DriverDtoGet createDriver(DriverDtoPost driverDto) {
@@ -49,8 +54,8 @@ public class DriverServiceImpl implements IDriverService {
 
 	@Override
 	public DriverDtoGet updateDriver(DriverDtoPost driverDto) {
-		// TODO Auto-generated method stub
-		return null;
+		Driver driver = driverRepository.save(driverMappper.convertDtoToEntity(driverDto));
+		return driverMappper.convertEntityToDto(driver);
 	}
 
 	@Override
@@ -83,5 +88,35 @@ public class DriverServiceImpl implements IDriverService {
 		} catch (DataIntegrityViolationException e) {
 			throw new BusinessException("Failed to delete driver due to data integrity constraints", e);
 		}
+	}
+
+	@Override
+	public Long count() {
+		return driverRepository.count();
+	}
+
+	@Override
+	public DriverDtoAvailability CheckDriverAvailability(Long id) throws RuntimeException {
+		Optional<Driver> driverOptional = driverRepository.findById(id);
+	    if (!driverOptional.isPresent())
+	        throw new ModelNotFoundException("Driver not found with ID: " + id);
+		
+		Driver driver = driverOptional.get();
+		DriverDtoAvailability driverDto = new DriverDtoAvailability();
+		
+		if(driver.getAvailabilityEnd().isBefore(LocalDateTime.now())) {
+			driverDto.setIsAvailable(true);
+			driverDto.setMessage("Driver is Available");
+		} else {
+			driverDto.setIsAvailable(true);
+			driverDto.setMessage("Driver is Unavailable");
+		}
+		return driverDto;
+	}
+
+	@Override
+	public DriverDtoAnalytics getDriverAnalytics(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

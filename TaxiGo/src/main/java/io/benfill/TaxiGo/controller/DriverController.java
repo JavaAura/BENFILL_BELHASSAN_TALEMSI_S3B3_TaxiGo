@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.benfill.TaxiGo.dto.driver.DriverDtoPost;
 import io.benfill.TaxiGo.exception.BusinessException;
+import io.benfill.TaxiGo.dto.driver.DriverDtoAvailability;
 import io.benfill.TaxiGo.dto.driver.DriverDtoGet;
 import io.benfill.TaxiGo.service.impl.DriverServiceImpl;
 import lombok.AllArgsConstructor;
@@ -63,7 +64,7 @@ public class DriverController {
 		if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getAllErrors().get(0).getDefaultMessage(), HttpStatus.BAD_REQUEST);
         }
-		DriverDtoGet savedDriver = driverService.createDriver(dto);
+		DriverDtoGet savedDriver = driverService.updateDriver(dto);
 		return ResponseEntity.status(HttpStatus.OK).body(savedDriver);
 		
 	}
@@ -72,7 +73,13 @@ public class DriverController {
 	public ResponseEntity<?> delete(@PathVariable Long id) throws BusinessException {
 		driverService.deleteDriver(id);
 		String messsage = "Driver Deleted successfully";
-		return ResponseEntity.status(HttpStatus.OK).body(messsage );
+		return ResponseEntity.status(HttpStatus.OK).body(messsage);
+	}
+	
+	@GetMapping("/availability/{id}")
+	public ResponseEntity<?> getDriverAvailability(@PathVariable Long id) {
+		DriverDtoAvailability dto = driverService.CheckDriverAvailability(id);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
 	}
 
 }
