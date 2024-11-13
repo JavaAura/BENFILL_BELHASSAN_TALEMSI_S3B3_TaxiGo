@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public @Data class DriverDtoResp {
+public @Data class DriverDtoGet {
 	private Long id;
 	private String firstName;
 	private String lastName;
 	private Status status;
 	private LocalDateTime availabilityStart;
 	private LocalDateTime availabilityEnd;
-	
+
 //	private List<ReservationDto> reservations;
 }

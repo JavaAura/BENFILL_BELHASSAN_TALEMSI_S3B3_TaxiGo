@@ -1,9 +1,10 @@
 package io.benfill.TaxiGo.exception;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @AllArgsConstructor
-public class ExceptionMessage {
+public @Data class ExceptionMessage {
 	private int status;
 	private String message;
 	
