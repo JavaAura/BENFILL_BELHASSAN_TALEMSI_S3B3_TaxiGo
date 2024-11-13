@@ -3,6 +3,8 @@ package io.benfill.TaxiGo.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
+
 import io.benfill.TaxiGo.dto.driver.DriverDtoPost;
 import io.benfill.TaxiGo.exception.BusinessException;
 import io.benfill.TaxiGo.dto.driver.DriverDtoAnalytics;
@@ -20,5 +22,6 @@ public interface IDriverService {
 	DriverDtoAvailability CheckDriverAvailability(Long id);
 	DriverDtoAnalytics getDriverAnalytics(Long id);
 	Long count();
+	ResponseEntity<DriverDtoAnalytics> getAnalytics();
 		
 }
