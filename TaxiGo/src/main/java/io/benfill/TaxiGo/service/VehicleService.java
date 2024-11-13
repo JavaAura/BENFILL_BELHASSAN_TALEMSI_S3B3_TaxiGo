@@ -6,4 +6,7 @@ import javax.validation.Valid;
 
 public interface VehicleService {
     VehicleResponseDto saveVehicle(@Valid  VehicleRequestDto vehicleRequestDto);
+    VehicleResponseDto updateVehicle(Long id, @Valid VehicleRequestDto vehicleRequestDto);
+    String deleteVehicle(Long id);
+
 }
