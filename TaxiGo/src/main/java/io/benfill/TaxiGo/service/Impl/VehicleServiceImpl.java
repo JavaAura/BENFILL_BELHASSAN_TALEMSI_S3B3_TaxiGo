@@ -1,4 +1,4 @@
-package io.benfill.TaxiGo.service.Impl;
+package io.benfill.TaxiGo.service.impl;
 
 import io.benfill.TaxiGo.dto.request.VehicleRequestDto;
 import io.benfill.TaxiGo.dto.response.VehicleResponseDto;
