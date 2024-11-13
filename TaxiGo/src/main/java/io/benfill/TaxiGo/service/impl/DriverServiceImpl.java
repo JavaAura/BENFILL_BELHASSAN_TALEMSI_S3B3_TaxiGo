@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import io.benfill.TaxiGo.dto.driver.DriverDtoReq;
 import io.benfill.TaxiGo.dto.driver.DriverDtoResp;
+import io.benfill.TaxiGo.exception.ModelNotFoundException;
 import io.benfill.TaxiGo.mapper.DriverMappper;
 import io.benfill.TaxiGo.model.Driver;
 import io.benfill.TaxiGo.repository.DriverRepository;
@@ -22,6 +23,11 @@ public class DriverServiceImpl {
 	
 	public Optional<Driver> getDriverById(Long id) {
 		return driverRepository.findById(id);
+	}
+	
+	public DriverDtoResp getDriverDetails(long id)  {
+		Driver driver = getDriverById(id).orElseThrow(()-> new ModelNotFoundException("Driver not found"));
+		return driverMappper.convertEntityToDto(driver);
 	}
 
 	public List<DriverDtoResp> getAllDrivers(){
