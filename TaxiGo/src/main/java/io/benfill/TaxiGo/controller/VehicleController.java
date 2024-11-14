@@ -1,5 +1,6 @@
 package io.benfill.TaxiGo.controller;
 
+import io.benfill.TaxiGo.dao.VehicleAnalyticsDto;
 import io.benfill.TaxiGo.dto.ValidationGroups;
 import io.benfill.TaxiGo.dto.request.VehicleRequestDto;
 import io.benfill.TaxiGo.dto.response.VehicleResponseDto;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -43,6 +46,22 @@ public class VehicleController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteVehicle(@PathVariable Long id) {
         vehicleService.deleteVehicle(id);
+    }
+
+
+    @GetMapping("/analytics")
+    public VehicleAnalyticsDto getVehicleAnalytics() {
+        return vehicleService.getAnalytics();
+    }
+
+    @GetMapping("/all")
+    public List<VehicleResponseDto> getAllVehicles() {
+        return vehicleService.getAllVehicles();
+    }
+
+    @GetMapping("/{id}")
+    public VehicleResponseDto getVehicleById(@PathVariable Long id) {
+        return vehicleService.getVehicleById(id);
     }
 
 }
