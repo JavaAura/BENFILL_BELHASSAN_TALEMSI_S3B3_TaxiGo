@@ -103,11 +103,6 @@ public class DriverServiceImpl implements IDriverService {
 	}
 
 	@Override
-	public Long count() {
-		return driverRepository.count();
-	}
-
-	@Override
 	public DriverDtoAvailability CheckDriverAvailability(Long id) throws RuntimeException {
 		Optional<Driver> driverOptional = driverRepository.findById(id);
 		if (!driverOptional.isPresent()) {
@@ -125,12 +120,6 @@ public class DriverServiceImpl implements IDriverService {
 			driverDto.setMessage("Driver is Unavailable");
 		}
 		return driverDto;
-	}
-
-	@Override
-	public DriverDtoAnalytics getDriverAnalytics(Long id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

@@ -27,10 +27,6 @@ public interface IDriverService {
 
 	DriverDtoAvailability CheckDriverAvailability(Long id);
 
-	DriverDtoAnalytics getDriverAnalytics(Long id);
-
-	Long count();
-
 	ResponseEntity<DriverDtoAnalytics> getAnalytics();
 
 }

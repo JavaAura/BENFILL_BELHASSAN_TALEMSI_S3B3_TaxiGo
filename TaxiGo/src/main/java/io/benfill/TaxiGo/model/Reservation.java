@@ -3,7 +3,20 @@ package io.benfill.TaxiGo.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.benfill.TaxiGo.model.enums.ReservationStatus;
 import io.benfill.TaxiGo.utils.AddressConverter;
@@ -22,7 +35,7 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
-	
+
 	@Column(name = "date_time", nullable = false)
 	private LocalDateTime dateTime;
 
@@ -33,27 +46,29 @@ public class Reservation {
 	@Convert(converter = AddressConverter.class)
 	@Column(name = "arrival_address", nullable = false)
 	private String arrivalAddress;
-	
-	@Column(name = "price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
 
-	@Column(name = "start_time_course" ,nullable = false)
+	@Column(name = "price", nullable = false, precision = 10, scale = 2)
+	private BigDecimal price;
+
+	@Column(name = "start_time_course", nullable = false)
 	private Integer startTimeCourse;
 
-	@Column(name = "end_time_course" ,nullable = false)
+	@Column(name = "end_time_course", nullable = false)
 	private Integer endTimeCourse;
-	
+
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private ReservationStatus status;
-	
+
 	@Column(name = "distance_km", nullable = false, precision = 10, scale = 2)
-    private BigDecimal distanceKm;
-	
+	private BigDecimal distanceKm;
+
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "driver_id", nullable = false)
 	private Driver driver;
-	
+
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vehicle_id", nullable = false)
 	private Vehicle vehicle;
