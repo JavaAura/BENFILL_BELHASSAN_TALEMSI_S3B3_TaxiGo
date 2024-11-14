@@ -1,10 +1,9 @@
-package io.benfill.TaxiGo.service.Impl;
+package io.benfill.TaxiGo.service.impl;
 
 import io.benfill.TaxiGo.model.Reservation;
 import io.benfill.TaxiGo.repository.ReservationRepository;
 import io.benfill.TaxiGo.service.ReservationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
