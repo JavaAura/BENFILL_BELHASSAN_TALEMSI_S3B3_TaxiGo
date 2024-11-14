@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import io.benfill.TaxiGo.dao.IDriverDao;
@@ -27,26 +26,27 @@ public class DriverDaoImpl implements IDriverDao {
 	public DriverDtoAnalytics getAnalytics() {
 		DriverDtoAnalytics driverDto = new DriverDtoAnalytics();
 		List<Driver> drivers = driverRepository.findAll();
-		
+
 		HashMap<String, Double> occupancyRates = new HashMap<String, Double>();
 		StatusCount statusCount = new StatusCount();
-		
+
 		drivers.forEach((driver) -> {
 			occupancyRates.put(driver.getFirstName(), getOccupancyRate(driver));
-			if(driver.getStatus() != null)  {
+			if (driver.getStatus() != null) {
 				if (driver.getStatus() == Status.AVAILABLE) {
 					statusCount.setAvailable(statusCount.getAvailable() + 1);
 				} else if (driver.getStatus() == Status.UNAVAILABLE) {
 					statusCount.setUnavailable(statusCount.getUnavailable() + 1);
-				} else   statusCount.setInProgress(statusCount.getInProgress() + 1);
-				
-			}});
-		
+				} else {
+					statusCount.setInProgress(statusCount.getInProgress() + 1);
+				}
+
+			}
+		});
+
 		driverDto.setOccupancyRate(occupancyRates);
 		driverDto.setDistributionofStatuses(statusCount);
-		
-		
-		
+		driverDto.setDriverCount(driverRepository.count());
 
 		return driverDto;
 	}

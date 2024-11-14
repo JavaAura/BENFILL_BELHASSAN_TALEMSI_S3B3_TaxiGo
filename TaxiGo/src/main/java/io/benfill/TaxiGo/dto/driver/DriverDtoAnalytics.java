@@ -6,8 +6,9 @@ import io.benfill.TaxiGo.model.StatusCount;
 import lombok.Data;
 
 public @Data class DriverDtoAnalytics {
-	
+
 	private HashMap<String, Double> occupancyRate;
 	private StatusCount distributionofStatuses;
+	private long driverCount;
 
 }

@@ -1,9 +1,9 @@
 server:
-  port: 8085
+  port: 8080
 
 spring:
   profiles:
-    active: prod
+    active: dev
   
   jpa:
     hibernate:
