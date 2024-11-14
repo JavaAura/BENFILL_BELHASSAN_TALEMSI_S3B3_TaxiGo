@@ -1,16 +1,15 @@
 package io.benfill.TaxiGo.dto;
 
-import io.benfill.TaxiGo.model.Driver;
-import io.benfill.TaxiGo.model.Vehicle;
+
 import io.benfill.TaxiGo.model.enums.ReservationStatus;
-import io.benfill.TaxiGo.utils.AddressConverter;
-import jakarta.validation.constraints.NotBlank;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 
