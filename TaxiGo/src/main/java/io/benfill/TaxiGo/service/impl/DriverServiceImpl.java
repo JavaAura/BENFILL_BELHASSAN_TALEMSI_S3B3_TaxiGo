@@ -6,15 +6,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import io.benfill.TaxiGo.dto.driver.DriverDtoPost;
 import io.benfill.TaxiGo.dao.IDriverDao;
 import io.benfill.TaxiGo.dto.driver.DriverDtoAnalytics;
 import io.benfill.TaxiGo.dto.driver.DriverDtoAvailability;
 import io.benfill.TaxiGo.dto.driver.DriverDtoGet;
+import io.benfill.TaxiGo.dto.driver.DriverDtoPost;
 import io.benfill.TaxiGo.exception.BusinessException;
 import io.benfill.TaxiGo.exception.ModelNotFoundException;
 import io.benfill.TaxiGo.mapper.DriverMappper;
@@ -35,20 +37,28 @@ public class DriverServiceImpl implements IDriverService {
 	private final ReservationRepository reservationRepository;
 	private final DriverMappper driverMappper;
 
+	@Override
 	public Optional<Driver> getDriverById(Long id) {
 		return driverRepository.findById(id);
 	}
 
+	@Override
 	public DriverDtoGet getDriverDetails(long id) {
 		Driver driver = getDriverById(id).orElseThrow(() -> new ModelNotFoundException("Driver not found"));
 		return driverMappper.convertEntityToDto(driver);
 	}
 
-	public List<DriverDtoGet> getAllDrivers() {
-		List<Driver> drivers = driverRepository.findAll();
+	@Override
+	public List<DriverDtoGet> getAllDrivers(Integer page) {
+
+		int size = 3;
+		Pageable pageable = PageRequest.of(page, size);
+		List<Driver> drivers = driverRepository.findAll(pageable).getContent();
+
 		return drivers.stream().map(d -> driverMappper.convertEntityToDto(d)).collect(Collectors.toList());
 	}
 
+	@Override
 	public DriverDtoGet createDriver(DriverDtoPost driverDto) {
 		Driver driver = driverRepository.save(driverMappper.convertDtoToEntity(driverDto));
 		return driverMappper.convertEntityToDto(driver);
@@ -80,7 +90,7 @@ public class DriverServiceImpl implements IDriverService {
 		List<Reservation> completedReservations = reservationRepository.findReservationsByDriverId(id);
 		if (!completedReservations.isEmpty()) {
 			reservationRepository.deleteAll(completedReservations);
-			 reservationRepository.flush();
+			reservationRepository.flush();
 		}
 
 		// Finally delete the driver
@@ -100,13 +110,14 @@ public class DriverServiceImpl implements IDriverService {
 	@Override
 	public DriverDtoAvailability CheckDriverAvailability(Long id) throws RuntimeException {
 		Optional<Driver> driverOptional = driverRepository.findById(id);
-	    if (!driverOptional.isPresent())
-	        throw new ModelNotFoundException("Driver not found with ID: " + id);
-		
+		if (!driverOptional.isPresent()) {
+			throw new ModelNotFoundException("Driver not found with ID: " + id);
+		}
+
 		Driver driver = driverOptional.get();
 		DriverDtoAvailability driverDto = new DriverDtoAvailability();
-		
-		if(driver.getAvailabilityEnd().isBefore(LocalDateTime.now())) {
+
+		if (driver.getAvailabilityEnd().isBefore(LocalDateTime.now())) {
 			driverDto.setIsAvailable(true);
 			driverDto.setMessage("Driver is Available");
 		} else {
