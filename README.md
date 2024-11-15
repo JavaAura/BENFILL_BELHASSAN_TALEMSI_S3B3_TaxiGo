@@ -10,6 +10,14 @@ The primary goal of this application is to streamline taxi service management, e
 - Vehicles (assignment, status, and analytics)
 - Analytics and reporting for improved operational insights
 
+## Useful Links
+- [GitHub Repository](https://github.com/Benfil/TaxiGo)
+- [JIRA Project Board](https://benfill.atlassian.net/jira/software/projects/TAX/boards/203?atlOrigin=eyJpIjoiMDg2NTc2MTE1ZDIzNDk0Y2I1NmRiODIwMjFhMjVlMTkiLCJwIjoiaiJ9)
+- [Swagger UI Documentation](http://localhost:8080/swagger-ui)
+- [API Docs (OpenAPI)](http://localhost:8080/v2/api-docs)
+- [Postman Collection](https://www.postman.com/crimson-crescent-536061/workspace/benfill-workspace/collection/30811349-9b737d7f-54c8-4e35-a6b7-37ff4d4ad4ea?action=share&creator=30811349)
+
+
 ## Key Features
 1. **Reservation Management**  
    - CRUD operations for reservations
@@ -99,10 +107,3 @@ Database migrations are managed by **Liquibase**, ensuring consistent database s
 ## Collaborators
 - **Anass Benfillous - Abdellah Talemsi - Anouar Belhassan**  
 For questions, contact at: [anass.benfillous@example.com](mailto:anass.benfillous@example.com)
-
-## Useful Links
-- [GitHub Repository](https://github.com/Benfil/TaxiGo)
-- [JIRA Project Board](https://benfill.atlassian.net/jira/software/projects/TAX/boards/203?atlOrigin=eyJpIjoiMDg2NTc2MTE1ZDIzNDk0Y2I1NmRiODIwMjFhMjVlMTkiLCJwIjoiaiJ9)
-- [Swagger UI Documentation](http://localhost:8080/swagger-ui)
-- [API Docs (OpenAPI)](http://localhost:8080/v2/api-docs)
-- [Postman Collection](https://www.postman.com/crimson-crescent-536061/workspace/benfill-workspace/collection/30811349-9b737d7f-54c8-4e35-a6b7-37ff4d4ad4ea?action=share&creator=30811349)
