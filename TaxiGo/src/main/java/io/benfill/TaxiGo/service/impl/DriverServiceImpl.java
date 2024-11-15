@@ -23,6 +23,7 @@ import io.benfill.TaxiGo.mapper.DriverMappper;
 import io.benfill.TaxiGo.model.Driver;
 import io.benfill.TaxiGo.model.Reservation;
 import io.benfill.TaxiGo.model.enums.ReservationStatus;
+import io.benfill.TaxiGo.model.enums.Status;
 import io.benfill.TaxiGo.repository.DriverRepository;
 import io.benfill.TaxiGo.repository.ReservationRepository;
 import io.benfill.TaxiGo.service.IDriverService;
@@ -65,7 +66,26 @@ public class DriverServiceImpl implements IDriverService {
 	}
 
 	@Override
-	public DriverDtoGet updateDriver(DriverDtoPost driverDto) {
+	public DriverDtoGet updateDriver(DriverDtoPost driverDto, long id) {
+
+		driverRepository.findById(id).orElseThrow(() -> new ModelNotFoundException("Driver not found with ID: " + id));
+
+		// Check if driver has any active reservations
+		List<Reservation> activeReservations = reservationRepository.findReservationsByDriverId(id).stream()
+				.filter(r -> r.getStatus() != null && (ReservationStatus.CONFIRMED.equals(r.getStatus())
+						|| ReservationStatus.CREATED.equals(r.getStatus())))
+				.collect(Collectors.toList());
+
+		Status newStatus = driverDto.getStatus();
+
+		if (!activeReservations.isEmpty()) {
+			if (!activeReservations.isEmpty() && newStatus.isConflictWithReservations()) {
+				throw new BusinessException(
+						"Cannot update driver's status to " + newStatus + " while they have active reservations.");
+			}
+
+		}
+
 		Driver driver = driverRepository.save(driverMappper.convertDtoToEntity(driverDto));
 		return driverMappper.convertEntityToDto(driver);
 	}
