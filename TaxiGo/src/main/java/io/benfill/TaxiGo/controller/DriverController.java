@@ -61,12 +61,13 @@ public class DriverController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestBody @Valid DriverDtoPost dto, BindingResult bindingResult) {
+	public ResponseEntity<?> update(@RequestBody @Valid DriverDtoPost dto, @PathVariable Long id,
+			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return new ResponseEntity<>(bindingResult.getAllErrors().get(0).getDefaultMessage(),
 					HttpStatus.BAD_REQUEST);
 		}
-		DriverDtoGet savedDriver = driverService.updateDriver(dto);
+		DriverDtoGet savedDriver = driverService.updateDriver(dto, id);
 		return ResponseEntity.status(HttpStatus.OK).body(savedDriver);
 
 	}

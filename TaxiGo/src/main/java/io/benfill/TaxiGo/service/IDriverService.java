@@ -21,7 +21,7 @@ public interface IDriverService {
 
 	public DriverDtoGet createDriver(DriverDtoPost driverDto);
 
-	public DriverDtoGet updateDriver(DriverDtoPost driverDto);
+	public DriverDtoGet updateDriver(DriverDtoPost driverDto, long id);
 
 	void deleteDriver(Long id) throws BusinessException;
 

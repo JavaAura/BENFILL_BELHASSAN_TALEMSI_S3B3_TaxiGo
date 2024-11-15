@@ -10,6 +10,9 @@ import lombok.Data;
 
 @AllArgsConstructor
 public @Data class DriverDtoPost {
+	public DriverDtoPost() {
+	}
+
 	@NotNull(message = "first name should not be null")
 	private String firstName;
 	@NotNull(message = "last name should not be null")
